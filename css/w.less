@@ -12,7 +12,6 @@ Thank you for using my theme~
   box-sizing: border-box;
 }
 h1,h2,h3,h4,h5,h6,h7,b,strong{
-    font-weight: 400;
     color:#111111;
 }
 .mdi{
@@ -30,27 +29,22 @@ code,code *{
 a {
   text-decoration: none;
   color: inherit;
-}
-li {
-  list-style: none;
-}
+} 
 hr{
     border-top: none;
 }
 table thead{
-    background-color: #e6e6e6;
-    color: black;
+    background-color: #7c96ec;
+    color: white;
 }
 table thead tr th{
     font-weight: 400;
+    padding:4px;
 }
 table tbody tr td{
     border-bottom: 1px solid #d4d4d4;
     transition:background-color 0.5s;
     padding:5px 10px;
-}
-table tbody tr td:hover{
-    background-color:#fafafa;
 }
 html{
     height:100%;
@@ -71,7 +65,7 @@ body {
     display:flex;
 }
 .bg{
-    background-image:url("https://i.loli.net/2018/03/31/5abe66d3b6a0a.jpg");
+    
     background-size:cover;
     background-attachment: fixed;
     background-position: center;
@@ -211,13 +205,14 @@ body {
 
 /* Archive 页面 */
 
-.archive-container{
+.archive-container,.category-container{
     display: flex!important;
     flex-wrap: wrap;
     height: 100vh;
     overflow-x:scroll;
     overflow-y:hidden;
     align-items: center;
+    transition:transform 0.8s;
 }
 .author-info{
     /*background-image: linear-gradient(to bottom, #fff1eb 0%, #ace0f9 100%);*/
@@ -250,6 +245,9 @@ body {
     }
     .desc{
         margin:0px 0 15px;
+        padding:0 30px;
+        word-break:break-all;
+        text-align: center;
         font-size:0.8rem;
         color:#8a8a8a;
     }
@@ -301,6 +299,7 @@ body {
                 box-shadow:1px 1px 15px rgba(0,0,0,0.1);
                 .mdi{
                     color:white;
+                    transition:color .3s;
                 }
                 svg path{
                     fill:white!important;
@@ -312,7 +311,6 @@ body {
             .mdi{
                 margin-top:2px;
                 font-size:19px;
-                transition:color .3s;
                 margin-right:4px;
             }
         }
@@ -325,7 +323,7 @@ body {
     flex-direction: row;
     align-items: center;
     .article{
-        cursor:pointer;
+        
         overflow:hidden;
         height:420px;
         width:550px;
@@ -341,6 +339,9 @@ body {
             background-color:white;
             font-size:1.5rem;
             padding:20px 40px;
+            a{
+                cursor:pointer;
+            }
             .meta{
                 font-size:0.8rem;
                 padding:5px 0 0;
@@ -364,12 +365,13 @@ body {
         }
         
         .content{
+            cursor:pointer;
             padding:0 40px;
             height:310px;
             overflow:hidden;
             word-break: break-all;
             font-size:0.9rem;
-            line-height:1.8;
+            line-height:1.75;
             img{
                 display:none; //预览不显示图片
             }
@@ -383,11 +385,13 @@ body {
         background-color:rgba(245,245,245,0.9);
         box-shadow:1px 1px 70px rgba(0,0,0,0.16);
         transition:box-shadow 0.35s;
+    
         &:hover{
             box-shadow: 0 0 70px rgba(0,0,0,0.16),1px 1px 35px rgba(0, 0, 0, 0.08);
         }
         .cover{
             height:340px;
+            cursor:pointer;
             width:550px;
             overflow:hidden;
             .cover-image{
@@ -423,6 +427,7 @@ body {
         .content{
             background-color:rgba(255,255,255,0.8);
             display:flex;
+            cursor:pointer;
             justify-content: space-between;
             .text{
                 margin: 10px 20px;
@@ -445,6 +450,7 @@ body {
                 background-color:#5f9ea0;
                 color:#fafafa;
                 margin-right:5px;
+                cursor:pointer;
                 &:nth-child(2){
                     background-color:#6495ed;
                 }
@@ -554,12 +560,24 @@ body {
     .content{
         padding:10px 0 20px;
         font-size:0.95em;
-        line-height:1.9;
+        line-height:1.8;
         *{
             max-width:100%;
         }
         &>*{
             padding:0 40px;
+        }
+        &>ul{
+            padding:0 70px;
+        }
+        a{
+            color:#5b4ade;
+        }
+        blockquote{
+            border-left: 3px solid #3b99f5;
+            padding: 1px 20px;
+            margin: 0 40px;
+            background-color: rgba(255, 255, 255, 0.5);
         }
         pre{
             padding:0;
@@ -586,6 +604,10 @@ body {
 #comments {
   transition: opacity 0.3s;
   
+}
+
+#comments li {
+  list-style: none;
 }
 #comments{
     box-shadow: 0px 0px 15px rgba(0,0,0,0.06);
@@ -1061,7 +1083,7 @@ to {opacity:0;transform:scale(0.5);}
 /* 自适应 */
 @media(max-width:991px) {
     html{
-        font-size:13.5px;
+        font-size:14.5px;
     }
     #comment-form .extra{
         flex-direction: column;
@@ -1081,7 +1103,7 @@ to {opacity:0;transform:scale(0.5);}
     #archive{
         overflow:auto;
     }
-    .archive-container{
+    .archive-container,.category-container{
         height:auto;
         overflow-x:hidden;
         overflow-y:scroll;
@@ -1139,21 +1161,30 @@ to {opacity:0;transform:scale(0.5);}
         min-width:100vw;
     }
     .page-wrapper .cover{
-        height:230px;
+        height:245px;
         width:100vw;
     }
     .page-wrapper .cover .cover-image{
         width:100vw;
     }
     .page-wrapper .cover .cover-image .title{
-        font-size:1.4rem;
+        font-size:1.55rem;
         padding:10px 20px;
     }
     .page-wrapper .content > *{
         padding:0 20px;
     }
+    .page-wrapper .content > ul{
+        padding:0 50px;
+    }
+    .page-wrapper .content blockquote{
+        margin:0 20px;
+    }
     .page-wrapper .title{
         font-size:1.5rem;
+    }
+    .page-wrapper .content pre code{
+        max-height:300px;
     }
     #comments .comments-head{
         padding:8px 20px;

@@ -4,34 +4,35 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 	exit;
 	?>
 
-        
-            <?php while($this->next()): ?>
-            <?php if ($this->fields->previewImage && $this->fields->previewImage!==""): ?>
-            <div class="article-with-preview" onclick="showArticle('<?php $this->permalink() ?>')">
-                <div class="cover">
-                    <div class="cover-image" style="background-image:url(<?php $this->fields->previewImage(); ?>)"><div class="title"><?php $this->title(); ?></div></div>
-                    
+        <?php function listArticles($art){ ?>
+            <?php while($art->next()): ?>
+            <?php if ($art->fields->previewImage && $art->fields->previewImage!==""): ?>
+            <div class="article-with-preview">
+                <div class="cover" onclick="showArticle('<?php $art->permalink() ?>')">
+                    <div class="cover-image" style="background-image:url(<?php $art->fields->previewImage(); ?>)"><div class="title"><?php $art->title(); ?></div></div>
                 </div>
-                <div class="content">
+                <div class="content" onclick="showArticle('<?php $art->permalink() ?>')">
                     <div class="text">
-                        <?php $this->excerpt(50, '') ?>
+                        <?php $art->excerpt(50, '') ?>
                     </div>
                 </div>
                 <div class="meta">
                     <div class="group">
-                        <?php array_map(function($v){echo '<a class="category" href="'.$v['permalink'].'" style="'.$v['description'].'">'.$v['name'].'</a>';},$this->categories) ?>
+                        <?php array_map(function($v){echo '<a class="category" onclick="showArchive(\''.$v['permalink'].'\')" style="'.$v['description'].'">'.$v['name'].'</a>';},$art->categories) ?>
                     </div>
-                    <div class="group date"><?php echo time_elapsed_string('@'.$this->created) ?>前 · <?php $this->author(); ?></div>
+                    <div class="group date"><?php echo time_elapsed_string('@'.$art->created) ?>前 · <?php $art->author(); ?></div>
                 </div>
             </div>
             <?php else: ?>
-            <div class="article" onclick="showArticle('<?php $this->permalink() ?>')">
-                <div class="title"><?php $this->title(); ?>
-                    <div class="meta"><?php array_map(function($v){echo '<a class="category" href="'.$v['permalink'].'" style="'.$v['description'].'">'.$v['name'].'</a>';},$this->categories) ?> <?php $this->author(); ?> · <?php echo time_elapsed_string('@'.$this->created) ?>前</div>
+            <div class="article">
+                <div class="title"><a onclick="showArticle('<?php $art->permalink() ?>')"><?php $art->title(); ?></a>
+                    <div class="meta"><?php array_map(function($v){echo '<a class="category" onclick="showArchive(\''.$v['permalink'].'\')" style="'.$v['description'].'">'.$v['name'].'</a>';},$art->categories) ?> <?php $art->author(); ?> · <?php echo time_elapsed_string('@'.$art->created) ?>前</div>
                 </div>
                 
-                <div class="content">
-                    <?php $this->content(); ?>
+                <div class="content" onclick="showArticle('<?php $art->permalink() ?>')">
+                    <?php $art->content(); ?>
                 </div>
             </div>
             <?php endif; endwhile;?>
+            
+        <?php } ?>

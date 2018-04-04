@@ -1,9 +1,10 @@
-var NowPosition; //0=index,1=archive,2=page
+var backArchive=false,categoryInfo;
 var nowLoading=false,nowSending=false;
 
 document.addEventListener('DOMContentLoaded',function(){
     horwheel(document.querySelector('.archive-container'));
-    document.querySelector('.archive-container').addEventListener('scroll',(e)=>{
+    horwheel(document.querySelector('.category-container'));
+    document.querySelectorAll('.archive-container,.category-container').forEach((e)=>{e.addEventListener('scroll',(e)=>{
         //从0开始，到300px完全消失
         var au=document.querySelector('.author-info');
         au.style.opacity=1-e.target.scrollLeft/300;
@@ -16,7 +17,7 @@ document.addEventListener('DOMContentLoaded',function(){
         if((e.target.scrollWidth - (e.target.scrollLeft+e.target.offsetWidth)) < 200){
             loadMoreArticles();
         }
-    })
+    })});
     document.querySelector('#archive').addEventListener('scroll',(e)=>{
         if((e.target.scrollHeight - (e.target.scrollTop+e.target.offsetHeight)) < 200){
             loadMoreArticles();
@@ -66,27 +67,41 @@ function ShowNav(){
 
 function loadMoreArticles(){
     var nextPageURL;
-    if(typeof pageInfo == "undefined"){
+    if(typeof pageInfo == "undefined" && backArchive!=true){
         return false;
     }
     if(nowLoading==true){
         return false;
     }
-    if(pageInfo.currentPage >= Math.ceil(pageInfo.total / pageInfo.pageSize)){
+    //普通文章判断到底
+    if(backArchive!=true && pageInfo.currentPage >= Math.ceil(pageInfo.total / pageInfo.pageSize)){
         console.log('到底了~');
         return false;
     }
+    //category判断到底
+    if(backArchive!=false && categoryInfo.pageNow >= Math.ceil(categoryInfo.total / pageInfo.pageSize)){
+        console.log('category到底了~');
+        return false;
+    }
     nowLoading=true;
-    if(pageInfo.permaLink){
+    targetElement=".archive-container .article-list";
+    if(categoryInfo && backArchive==true){
+        nextPageURL=categoryInfo.url + (categoryInfo.pageNow+1) + "/";
+        categoryInfo.pageNow++;
+        targetElement=".category-container .article-list";
+    }else if(pageInfo.permaLink){
         nextPageURL=pageInfo.permaLink + (parseInt(pageInfo.currentPage) + 1) + "/";
     }else if(pageInfo.type == "index" || pageInfo.type == "index_page" ){
         nextPageURL="/page/" + (parseInt(pageInfo.currentPage) + 1) + "/";
+    }else if(pageInfo.type=="category"){
+        nextPageURL=window.location + (parseInt(pageInfo.currentPage) + 1) + "/";
     }
     fetch(nextPageURL + "?ajaxload",{credentials:'include'}).then(data=>data.text()).then(text=>{
         parseToDOM(text).forEach((el)=>{
             if(el.tagName=="DIV"){
-                document.querySelector('.article-list').appendChild(el);
+                document.querySelector(targetElement).appendChild(el);
             }
+            
         });
         pageInfo.currentPage=parseInt(pageInfo.currentPage) + 1;
         nowLoading=false;
@@ -142,15 +157,25 @@ function MoveCheck(inEl,outEl){
 
 function back(){
     var current=document.querySelector('.move-show').id;
+    
     if(current=="page"){
+        
         Move('#archive','#page','up');
         document.querySelector('#back').style.transform=null;
         history.pushState(null,null,"/");
     }else if(current=="archive"){
+        if(backArchive==true){
+            history.pushState(null,null,"/");
+            backArchive=false;
+            document.querySelector('.archive-container').style.transform=null;
+            document.querySelector('.category-container').style.transform=null;
+            document.querySelector('.archive-container').style.marginTop=null;
+            setTimeout(function() {document.querySelector(".archive-container").style.overflowX="scroll";}, 800);
+            return;
+        }
         Move('#index','#archive','left');
         document.querySelector('#back').style.opacity=0;
     }
-    
 }
 
 window.commentMode=0; //0为邮箱Gravatar，1为使用QQ头像
@@ -220,4 +245,36 @@ function biggerFont(){
     var target=document.querySelector('.page-wrapper .content');
     target.style.fontSize= (target.style.fontSize=='') ? '15px' : target.style.fontSize;
     target.style.fontSize=(parseInt(target.style.fontSize)+1) + "px"; 
+}
+
+function showArchive(url){
+    history.pushState(null,null,url);
+    categoryInfo={url:url,pageNow:1,total:0};
+    backArchive=true;
+    //响应式处理不一样
+    if(window.outerWidth>991){
+    //移动首页内容不可见
+    document.querySelector('.archive-container').style.overflowX="hidden";
+    document.querySelector('.archive-container').style.transform="translate(0,-100vh)";
+    }else{
+        document.querySelector('.archive-container').style.marginTop="-" + document.querySelector('.archive-container').offsetHeight + "px";
+    }
+    //清除原来的内容
+    if(document.querySelector('.category-container>*')){document.querySelectorAll('.category-container>*').forEach((e)=>{e.remove()})};
+    //添加内容
+    fetch(url + "?ajaxload=firstload",{credentials:'include'}).then(data=>data.text()).then(text=>{
+        parseToDOM(text).forEach((el)=>{
+            if(el.tagName=="DIV"){
+                if(window.outerWidth>991){
+                document.querySelector('.category-container').appendChild(el);
+                document.querySelector('.category-container').style.transform="translate(0,-100vh)";
+                }else{
+                    document.querySelector('.category-container').appendChild(el);
+                }
+            }
+            if(el.id=="tmp_total"){
+                categoryInfo.total=el.value;
+            }
+        });
+    });
 }
