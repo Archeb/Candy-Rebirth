@@ -52,6 +52,14 @@
                     	<svg style="width:50px;height:15px" viewBox="0 0 24 24">
     <path fill="#444444" d="M9,19V13H11L13,13H15V19H18V10.91L12,4.91L6,10.91V19H9M12,2.09L21.91,12H20V21H13V15H11V21H4V12H2.09L12,2.09Z" />
 </svg></span><input type="url" name="url" id="url" class="text" style="margin-right: 0;" placeholder="<?php _e('网站'); ?>" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?> />
+                        <script>
+                            var mail = document.querySelector('#mail').value;
+                            var end;
+                            if((end = mail.indexOf('@use.qq.avatar')) != -1) {
+                                changeCommentAvatarMode();
+                                document.querySelector('#mail').value = mail.substring(0, end);
+                            }
+                        </script>
                         <?php endif; ?>
                 </div>
             </form>
