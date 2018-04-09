@@ -214,6 +214,7 @@ function sendComment(){
     nowSending=true;
     var form=document.querySelector('#comment-form');
     var data = new FormData(form);
+    mail = data.get('mail');
     if(window.commentMode==1){
         data.set("mail",data.get('mail')+"@use.qq.avatar");
     }
@@ -221,21 +222,41 @@ function sendComment(){
         nowSending=false;
         if(text.indexOf('Error')!=-1){
             alert(parseToDOM(text)[7].innerText.trim());
+        } else if (text.indexOf('Typecho_Widget_Exception: ') != -1) {
+            alert(text.match(/Typecho_Widget_Exception: ([\S\s]*?)in/)[1]);
         }else{
             document.querySelector('.respond #textarea').value="";
             var newComment=document.querySelector('#comments>li').cloneNode(1);
             if(newComment.querySelector('.comment-children')){newComment.removeChild(newComment.querySelector('.comment-children'))};
             newComment.querySelector('.comment-author-name').innerText=data.get('author');
-            newComment.querySelector('.avatar').src='https://gravatar.cat.net/avatar/' + data.get('mail').MD5(32) + '?s=55&r=G&d=';
+            if (window.commentMode == 1) {
+                newComment.querySelector('.avatar').src = 'http://q2.qlogo.cn/headimg_dl?dst_uin='+ mail +'&spec=100';
+            } else {
+                newComment.querySelector('.avatar').src = 'https://gravatar.cat.net/avatar/' + data.get('mail').MD5(32) + '?s=55&r=G&d=';
+            }
             newComment.querySelector('.comment-content').innerHTML='<p>' + data.get('text') + '</p>';
             newComment.querySelector('.comment-time').innerText=new Date().toISOString().replace('T',' ').substr(0,new Date().toISOString().replace('T',' ').lastIndexOf(':'));
-            var comment_list=document.querySelector('.comment-list')
-            if(!comment_list){
-                comment_list=document.createElement('ol');
-                comment_list.classList.add('comment-list');
-                document.querySelector('#comments').appendChild(comment_list);
+            if (data.get('parent') == '') {
+                var comment_list = document.querySelector('.comment-list');
+                if (!comment_list) {
+                    comment_list = document.createElement('ol');
+                    comment_list.classList.add('comment-list');
+                    document.querySelector('#comments').appendChild(comment_list);
+                }
+                comment_list.appendChild(newComment);
+            } else {
+                var comment_list = document.querySelector('#li-comment-'+data.get('parent')+' .comment-list');
+                if (!comment_list) {
+                    var comment_children = document.createElement('div');
+                    comment_children.classList.add('comment-children');
+                    comment_list = document.createElement('ol');
+                    comment_list.classList.add('comment-list');
+                    var comment_li = document.querySelector('#li-comment-'+data.get('parent'))
+                    comment_li.appendChild(comment_children);
+                    comment_children.appendChild(comment_list);
+                }
+                comment_list.appendChild(newComment);
             }
-            comment_list.appendChild(newComment);
             alert('评论成功');
         }
     });
