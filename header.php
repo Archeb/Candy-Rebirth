@@ -19,7 +19,14 @@ error_reporting(E_ALL | E_STRICT);
 	<link href="<?php $this->options->themeUrl('css/materialdesignicons.min.css'); ?>" media="all" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div class="bg" style="background-image:url('https://i.loli.net/2018/03/31/5abe66d3b6a0a.jpg');"></div>
+    <?php 
+    if ($this->options->bgURL){
+        $bgURL=$this->options->bgURL;
+    }else{
+        $bgURL='https://i.loli.net/2018/04/15/5ad2ca39da9bb.jpg';
+    }
+    ?>
+    <div class="bg" style="background-image:url('<?php echo $bgURL ?>');"></div>
     <div class="menu">
         <div class="group">
             <a class="item mdi mdi-arrow-left" id="back" onclick="back()"></a>

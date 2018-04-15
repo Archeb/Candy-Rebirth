@@ -2,6 +2,10 @@
 
 一个Typecho单行横屏滚动主题！
 
+预览地址 https://qwq.moe/
+
+博客对该主题的介绍 https://qwq.moe/archives/712/
+
 ### 主题特色
 - 别具一格的横屏滚动
 - 自适应屏幕大小，风格一致
@@ -15,14 +19,22 @@
 - Enjoy it!
 
 ### 设置项
-- 到管理->分类->分类描述中可以自定义背景颜色和一些样式，如`background-color:#6495ed;`就是设置背景颜色
-- 设置背景图片，打开`header.php`，找到22行，修改地址为你的图片地址
-- 设置首屏，打开`index.php`，找到30行，去掉`move-show`，然后在20行的`class="xxx"`里面加上`move-show`
-- 修改个人信息，到`author-info.php`
+- 到 管理->分类->分类描述 中可以自定义背景颜色和一些样式，如`background-color:#6495ed;`就是设置背景颜色
+- 到 外观->设置外观 中可以设置背景、Logo、首屏、社交网络
 
-以上设置方法仅为这几个测试版本的临时措施，等我有空了会做一个友好一些的设置选项，暂时麻烦各位手动改一下~
+### SNS链接设置
+
+	<a href="链接地址" target="_blank" class="item"><span class="mdi mdi-图标类名"></span>显示内容</a>
+
+一行一个，图标类名请参考 https://cdn.materialdesignicons.com/2.0.46/
 
 ### 更新日志
+#### v1.2
+- 添加了主题后台设置项
+- 添加一些视觉效果
+- 评论部分用户体验优化 (By @lichaoxilcx)
+- 修复BUG
+
 #### v1.1
 - 修复了Archive分类功能
 - 修正了一些样式

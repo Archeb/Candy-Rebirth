@@ -1,13 +1,12 @@
 <?php
 /**
- * Candy: Rebirth (CodeName: Move)
+ * 一个单行横向滚动主题！
  * 
  * @package Candy: Rebirth
  * @author Archeb
- * @version 1.1.0
+ * @version 1.2
  * @link https://qwq.moe/
  */
- 
 if (!defined('__TYPECHO_ROOT_DIR__'))
 	exit;
 	if(isset($_GET['ajaxload'])){
@@ -17,7 +16,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 	}
 $this -> need('header.php');
 ?>
-<div id="index" class="screen index">
+<div id="index" class="screen index <?php if($this->options->firstScreen=="showIndex") echo "move-show"; ?>">
     <div style="margin:40vh auto;text-align:center;">
         <h1 style="font-size:2.3rem"><?php $this->options->title(); ?></h1>
         <span style="color:#696969;font-size:0.9rem"><?php $this->options->description(); ?></font>
@@ -27,7 +26,7 @@ $this -> need('header.php');
     </div>
     
 </div>
-<div id="archive" class="screen archive move-show">
+<div id="archive" class="screen archive <?php if($this->options->firstScreen=="showArchive") echo "move-show"; ?>">
     <div class="archive-container">
         <?php $this->need('author-info.php'); ?>
         <div class="article-list">

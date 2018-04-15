@@ -37,18 +37,17 @@ function handleStat(){
 <?php
 
 function themeConfig($form) {
-    $logoUrl = new Typecho_Widget_Helper_Form_Element_Text('logoUrl', NULL, NULL, _t('站点 LOGO 地址'), _t('在这里填入一个图片 URL 地址, 以在网站标题前加上一个 LOGO'));
-    $form->addInput($logoUrl);
-    
-    $sidebarBlock = new Typecho_Widget_Helper_Form_Element_Checkbox('sidebarBlock', 
-    array('ShowRecentPosts' => _t('显示最新文章'),
-    'ShowRecentComments' => _t('显示最近回复'),
-    'ShowCategory' => _t('显示分类'),
-    'ShowArchive' => _t('显示归档'),
-    'ShowOther' => _t('显示其它杂项')),
-    array('ShowRecentPosts', 'ShowRecentComments', 'ShowCategory', 'ShowArchive', 'ShowOther'), _t('侧边栏显示'));
-    
-    $form->addInput($sidebarBlock->multiMode());
+    $bgURL = new Typecho_Widget_Helper_Form_Element_Text('bgURL', NULL, NULL, _t('站点背景图片地址'), _t('在这里填入一个图片 URL 地址, 作为背景图片'));
+    $form->addInput($bgURL);
+    $logoURL = new Typecho_Widget_Helper_Form_Element_Text('logoURL', NULL, NULL, _t('站点Logo地址'), _t('在这里填入一个图片 URL 地址, 作为Logo头像。留空自动使用文章作者头像'));
+    $form->addInput($logoURL);
+    $SNSHTML = new Typecho_Widget_Helper_Form_Element_Textarea('SNSHTML', NULL, NULL, _t('SNS链接设置'), _t('编辑此处HTML即可修改作者信息下面的社交网络内容，不知道怎么写？<a href="https://github.com/Archeb/Candy-Rebirth">【参考这里】</a>'));
+    $form->addInput($SNSHTML);
+    $firstScreen = new Typecho_Widget_Helper_Form_Element_Radio('firstScreen', 
+    array('showIndex' => _t('显示首页(Explore Me)'),
+    'showArchive' => _t('显示文章列表')),
+    array('showIndex', 'showArchive'), _t('首屏显示选项'));
+    $form->addInput($firstScreen->multiMode());
 }
 
 function themeFields($layout) {
@@ -61,10 +60,6 @@ function themeFields($layout) {
     <?php
     $previewImage = new Typecho_Widget_Helper_Form_Element_Text('previewImage', NULL, NULL, "文章封面图", "在此填入一个图片地址以显示文章封面图，留空不显示");
     $layout->addItem($previewImage);
-    if($_SERVER['SCRIPT_NAME']=="/admin/write-page.php"){
-        $icon = new Typecho_Widget_Helper_Form_Element_Text('icon', NULL, NULL, "图标", "在此填入MDI图标类名，将会显示在导航栏中。<a href=\"https://cdn.materialdesignicons.com/2.0.46/\">类名参考</a>");
-    $layout->addItem($icon);
-    }
 }
 
 function threadedComments($comments, $options) {
