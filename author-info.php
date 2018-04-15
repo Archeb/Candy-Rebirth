@@ -16,4 +16,10 @@
             <div class="social">
                 <?php if ($this->options->SNSHTML) echo $this->options->SNSHTML ; ?>
             </div>
+            <div class="copyright">
+                © <?php $this->options->title(); ?> 2014-2018
+                <div class="theme-info">
+                    Theme <a href="https://github.com/Archeb/Candy-Rebirth">Candy-Rebirth</a> By <a href="https://qwq.moe/">Archeb</a>
+                </div>
+            </div>
         </div>
