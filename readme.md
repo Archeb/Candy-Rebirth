@@ -35,11 +35,13 @@
 一行一个，图标类名请参考 https://cdn.materialdesignicons.com/2.0.46/
 
 ### 更新日志
+
 #### v1.2
 - 添加了主题后台设置项
 - 添加一些视觉效果
 - 评论部分用户体验优化 (By @lichaoxilcx)
 - 修复BUG
+- 1.2.1 => 修复永久链接路径为.html的加载效果BUG
 
 #### v1.1
 - 修复了Archive分类功能
