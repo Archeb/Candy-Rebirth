@@ -120,7 +120,7 @@ function showArticle(url){
     Move('#page','#archive','down');
     document.querySelector('#back').style.transform="rotate(90deg)";
     history.pushState(null,null,url);
-    if(url.substr(-1)!='/' && url.indexOf('archives')!=-1){url+="/"}
+    if(url.substr(-1)!='/' && url.indexOf('archives')!=-1 && url.substr(-5)!='.html'){url+="/"}
     fetch(url+"?ajaxload",{credentials:'include'}).then(data=>data.text()).then(text=>{
         parseToDOM(text).forEach((el)=>{
             if(el.tagName=="DIV"){
