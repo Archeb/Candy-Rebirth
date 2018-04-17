@@ -34,6 +34,22 @@
 
 一行一个，图标类名请参考 https://cdn.materialdesignicons.com/2.0.46/
 
+### 内置友链模板
+
+在任意页面都可以
+
+  
+      <div class="friends">
+        <a class="a-friend" target="_blank" style="background-color:背景颜色;color:前景颜色" href="博客链接">
+          <img class="blog-avatar" src="博客头像地址" />
+          <div class="text-container">
+            <div class="name">博客名字</div>
+            <div class="description">博客描述</div></div>
+        </a>
+        <!-- 在此区域内重复上面的即可 -->
+      </div>
+
+
 ### 更新日志
 
 #### v1.2
