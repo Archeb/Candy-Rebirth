@@ -37,8 +37,7 @@
 ### 内置友链模板
 
 在任意页面都可以
-
-  
+	
       <div class="friends">
         <a class="a-friend" target="_blank" style="background-color:背景颜色;color:前景颜色" href="博客链接">
           <img class="blog-avatar" src="博客头像地址" />
