@@ -6,6 +6,15 @@
 
 博客对该主题的介绍 https://qwq.moe/archives/712/
 
+### 温馨提示
+
+最近发现好多人装了主题然而css之类的文件一个也无法加载
+
+请注意Typecho不允许主题文件夹中带有横杠
+
+所以请不要放在/usr/themes/candy-rebirth/之类的地方，要记得把横杠删掉
+
+
 ### 鸣谢
 
 感谢 @lichaoxilcx 对本主题的贡献！
@@ -21,7 +30,9 @@
 
 ### 使用方法
 - Clone或者下载ZIP
-- 解压到Typecho目录的usr/themes下
+- 在Typecho目录的usr/themes下新建一个文件夹
+- **文件夹名字里绝对不要带有横杠，Typecho不支持**你可以起一个名字叫rebirth之类的
+- 解压到新建的文件夹里
 - Enjoy it!
 
 ### 设置项
