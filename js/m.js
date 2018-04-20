@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded',function(){
     window.addEventListener("popstate", function(e) { 
         back();
     }, false);
+    document.querySelector('#search').addEventListener('keyup',handleSearch)
 })
 
 document.addEventListener('keyup',function(e){
@@ -33,6 +34,13 @@ document.addEventListener('keyup',function(e){
         back();
     }
 })
+
+function handleSearch(e){
+    if(e.key=="Enter"){
+        showArchive("/search/" + e.target.value + "/");
+        e.target.value="";
+    }
+}
 
 function Move(inEl,outEl,direction){
     MoveCheck(inEl,outEl);
@@ -117,8 +125,13 @@ function parseToDOM(str){
 
 function showArticle(url){
     document.querySelector('.archive-container').style.overflow="hidden";
-    Move('#page','#archive','down');
+    if(document.querySelector('.move-show').id=="page"){
+        //现在就是文章页
+        //Todo: Transition
+    }else{
+    Move('#page','.move-show','down');
     document.querySelector('#back').style.transform="rotate(90deg)";
+    }
     history.pushState(null,null,url);
     if(url.substr(-1)!='/' && url.indexOf('archives')!=-1 && url.substr(-5)!='.html'){url+="/"}
     fetch(url+"?ajaxload",{credentials:'include'}).then(data=>data.text()).then(text=>{
@@ -143,6 +156,7 @@ function MoveCheck(inEl,outEl){
         document.querySelector('#back').style.transform="rotate(90deg)";
         setTimeout(function() {document.querySelector("#page").style.overflowY="scroll"}, 800);
         document.querySelector(".drop-down").style.transform="translate(0)";
+        document.querySelector('#back').style.opacity=1;
         document.querySelector(".drop-down").style.opacity="1";
     }
     if(outEl=="#page"){
@@ -164,6 +178,13 @@ function back(){
         document.querySelector('#back').style.transform=null;
         history.pushState(null,null,"/");
     }else if(current=="archive"){
+        if(document.querySelector('.archive-container').scrollLeft!=0 && backArchive==false){
+            document.querySelector('.archive-container').scrollTo({"behavior": "smooth", "left":0})
+            return;
+        }else if(document.querySelector('.category-container').scrollLeft!=0 && backArchive==true){
+            document.querySelector('.category-container').scrollTo({"behavior": "smooth", "left":0})
+            return;
+        }
         if(backArchive==true){
             
             history.pushState(null,null,"/");
@@ -222,9 +243,9 @@ function sendComment(){
     fetch(form.action,{credentials:'include',method: "POST",body:data}).then(function(data){return data.text()}).then(function(text){
         nowSending=false;
         if(text.indexOf('Error')!=-1){
-            alert(parseToDOM(text)[7].innerText.trim());
+            showNotify('评论失败',parseToDOM(text)[7].innerText.trim(),'background-color:#ff3f3f');
         } else if (text.indexOf('Typecho_Widget_Exception: ') != -1) {
-            alert(text.match(/Typecho_Widget_Exception: ([\S\s]*?)in/)[1]);
+            showNotify('评论失败',text.match(/Typecho_Widget_Exception: ([\S\s]*?)in/)[1],'background-color:#ff3f3f');
         }else{
             document.querySelector('.respond #textarea').value="";
             var newComment=document.querySelector('#comments>li').cloneNode(1);
@@ -258,7 +279,7 @@ function sendComment(){
                 }
                 comment_list.appendChild(newComment);
             }
-            alert('评论成功');
+            showNotify('评论成功','您的评论已成功发送');
         }
     });
 }
@@ -271,6 +292,9 @@ function biggerFont(){
 }
 
 function showArchive(url){
+    if(document.querySelector('.move-show').id=="page"){
+        back();
+    }
     history.pushState(null,null,url);
     categoryInfo={url:url,pageNow:1,total:0};
     backArchive=true;
@@ -300,4 +324,10 @@ function showArchive(url){
             }
         });
     });
+}
+
+function showNotify(title,content,style){
+    var ne=parseToDOM('<div class="notify" style="' + style + '"><div class="title">' + title + '</div><div class="content">' + content + '</div></div>')[0]
+    document.querySelector('.notify-container').appendChild(ne);
+    setTimeout(function(){ne.remove()},5000);
 }

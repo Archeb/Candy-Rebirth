@@ -4,10 +4,12 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
 	exit;
 	?>
 
-        <?php function listArticles($art){ ?>
-            <?php while($art->next()): ?>
+        <?php function listArticles($art){
+            $delay=0;
+            while($art->next()):
+            $delay++; ?>
             <?php if ($art->fields->previewImage && $art->fields->previewImage!==""): ?>
-            <div class="article-with-preview">
+            <div class="article-with-preview right-in-animation" style="animation-duration:<?php echo 0.5+$delay*0.1?>s">
                 <div class="cover" onclick="showArticle('<?php $art->permalink() ?>')">
                     <div class="cover-image" style="background-image:url(<?php $art->fields->previewImage(); ?>)"><div class="title"><?php $art->title(); ?></div></div>
                 </div>
@@ -24,7 +26,7 @@ if (!defined('__TYPECHO_ROOT_DIR__'))
                 </div>
             </div>
             <?php else: ?>
-            <div class="article">
+            <div class="article right-in-animation">
                 <div class="title"><a onclick="showArticle('<?php $art->permalink() ?>')"><?php $art->title(); ?></a>
                     <div class="meta"><?php array_map(function($v){echo '<a class="category" onclick="showArchive(\''.$v['permalink'].'\')" style="'.$v['description'].'">'.$v['name'].'</a>';},$art->categories) ?> <?php $art->author(); ?> · <?php echo time_elapsed_string('@'.$art->created) ?>前</div>
                 </div>

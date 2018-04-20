@@ -37,12 +37,12 @@ if(!isset($_GET['ajaxload'])){
     <div class="cover">
         <div class="cover-image" style="background-image:url(<?php $this->fields->previewImage(); ?>)">
             <div class="title"><?php $this->title(); ?>
-            <div class="meta"><?php array_map(function($v){echo '<a class="category" href="'.$v['permalink'].'" style="'.$v['description'].'">'.$v['name'].'</a>';},$this->categories) ?> <?php $this->author(); ?> · <?php echo time_elapsed_string('@'.$this->created) ?>前</div></div>
+            <div class="meta"><?php array_map(function($v){echo '<a class="category" onclick="showArchive(\''.$v['permalink'].'\')" style="'.$v['description'].'">'.$v['name'].'</a>';},$this->categories) ?> <?php $this->author(); ?> · <?php echo time_elapsed_string('@'.$this->created) ?>前</div></div>
         </div>
     </div>
     <?php else: ?>
     <div class="title"><?php $this->title(); ?>
-    <div class="meta"><?php array_map(function($v){echo '<a class="category" href="'.$v['permalink'].'" style="'.$v['description'].'">'.$v['name'].'</a>';},$this->categories) ?> <?php $this->author(); ?> · <?php echo time_elapsed_string('@'.$this->created) ?>前</div>
+    <div class="meta"><?php array_map(function($v){echo '<a class="category" onclick="showArchive(\''.$v['permalink'].'\')" style="'.$v['description'].'">'.$v['name'].'</a>';},$this->categories) ?> <?php $this->author(); ?> · <?php echo time_elapsed_string('@'.$this->created) ?>前</div>
     </div>
     <?php endif; ?>
     <div class="content">

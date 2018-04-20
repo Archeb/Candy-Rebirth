@@ -46,8 +46,21 @@ function themeConfig($form) {
     $firstScreen = new Typecho_Widget_Helper_Form_Element_Radio('firstScreen', 
     array('showIndex' => _t('显示首页(Explore Me)'),
     'showArchive' => _t('显示文章列表')),
-    array('showIndex', 'showArchive'), _t('首屏显示选项'));
-    $form->addInput($firstScreen->multiMode());
+    'showArchive', _t('首屏显示选项'));
+    $form->addInput($firstScreen);
+    
+    $wrapperLoaction = new Typecho_Widget_Helper_Form_Element_Radio('wrapperLoaction', 
+    array('placeLeft' => _t('居左'),
+    'placeMiddle' => _t('居中'),
+    'placeRight' => _t('居右')),
+    'placeLeft', _t('文章内页位置'));
+    $form->addInput($wrapperLoaction);
+    
+    $navColor = new Typecho_Widget_Helper_Form_Element_Radio('navColor', 
+    array('dark' => _t('暗色'),
+    'bright' => _t('亮色')),
+    'dark', _t('导航栏颜色风格'),'请根据背景图色调选择');
+    $form->addInput($navColor);
 }
 
 function themeFields($layout) {
@@ -91,6 +104,9 @@ echo $commentClass;
                 <div class="comment-author-avatar">
                     <a target="_blank" href="<?php echo $comments->url; ?>"><?php
                     $mail=$comments->mail;
+                    if($mail==""){
+                        $mail="nomail@nomail.nomail";
+                    }
                     $mail = explode("@",$mail); 
                     if($mail[1]=="use.qq.avatar"){
                         echo '<img class="avatar" src="https://q2.qlogo.cn/headimg_dl? bs='.$mail[0].'&dst_uin='.$mail[0].'&spec=100&url_enc=0&referer=bu_interface&term_type=PC" width="55px" height="55px">';

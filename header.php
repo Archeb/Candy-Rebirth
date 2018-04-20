@@ -17,6 +17,30 @@ error_reporting(E_ALL | E_STRICT);
 	<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 	<link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/vs2015.min.css" rel="stylesheet">
 	<link href="<?php $this->options->themeUrl('css/materialdesignicons.min.css'); ?>" media="all" rel="stylesheet" type="text/css" />
+	<style>
+	    .page-container{
+	        <?php if($this->options->wrapperLoaction=="placeMiddle"){ ?>
+	        justify-content: center;
+	       <?php }else if($this->options->wrapperLoaction=="placeRight"){ ?>
+	        flex-direction: row-reverse;
+	       <?php } ?>
+	    }
+	    <?php if($this->options->navColor=="bright"){ ?>
+	    .menu .group .item{
+	        color:#dedede;
+	    }
+	    .menu .group .item:hover{
+	        color:#fafafa;
+	        text-shadow: 1px 1px 10px rgba(255,255,255,0.2), 1px 1px 10px rgba(255,255,255,0.2);
+	    }
+	    .menu .group .item:active{
+	        color:#ffffff;
+	    }
+	    .menu .group .drop-down{
+	        color:#dedede;
+	    }
+	    <?php } ?>
+	</style>
 </head>
 <body>
     <?php 
@@ -27,6 +51,7 @@ error_reporting(E_ALL | E_STRICT);
     }
     ?>
     <div class="bg" style="background-image:url('<?php echo $bgURL ?>');"></div>
+    <div class="notify-container"></div>
     <div class="menu">
         <div class="group">
             <a class="item mdi mdi-arrow-left" id="back" onclick="back()"></a>
@@ -44,5 +69,9 @@ error_reporting(E_ALL | E_STRICT);
                 
             </div>
             <a onclick="ShowNav()" class="item mdi mdi-menu"></a>
+            <a onclick="document.querySelector('#search').focus()" class="item mdi mdi-magnify"></a>
+            <div class="search">
+                <input class="search-box" name="search" id="search" placeholder="回车Go！">
+            </div>
         </div>
     </div>

@@ -48,10 +48,10 @@
 </svg><input type="text" name="author" id="author" class="text" value="<?php $this->remember('author'); ?>" placeholder="<?php _e('称呼'); ?>" required />
                     	<svg onclick="changeCommentAvatarMode()" style="width:50px;height:15px;cursor:pointer;" viewBox="0 0 24 24">
     <path id="avatarMode" fill="#444444" d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" />
-</svg></span><input type="email" name="mail" id="mail" class="text" placeholder="←点此使用QQ头像" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?> />
+</svg></span><input type="email" name="mail" id="mail" class="text" placeholder="←点小信封使用QQ头像" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?> />
                     	<svg style="width:50px;height:15px" viewBox="0 0 24 24">
     <path fill="#444444" d="M9,19V13H11L13,13H15V19H18V10.91L12,4.91L6,10.91V19H9M12,2.09L21.91,12H20V21H13V15H11V21H4V12H2.09L12,2.09Z" />
-</svg></span><input type="url" name="url" id="url" class="text" style="margin-right: 0;" placeholder="<?php _e('网站'); ?>" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?> />
+</svg></span><input type="url" name="url" id="url" class="text" style="margin-right: 0;" placeholder="<?php _e('网站'); ?><?php if (!$this->options->commentsRequireURL): ?> (选填)<?php endif; ?>" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?> />
                         <script>
                             var mail = document.querySelector('#mail').value;
                             var end;
