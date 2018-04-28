@@ -22,7 +22,7 @@
 
 ### 使用方法
 - Clone或者下载ZIP
-- 解压到Typecho目录的usr/themes下
+- 解压后直接把Candy-Rebirth-master文件夹放到 /usr/themes 目录下
 - Enjoy it!
 
 ### 设置项
