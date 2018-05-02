@@ -43,6 +43,8 @@ function themeConfig($form) {
     $form->addInput($logoURL);
     $SNSHTML = new Typecho_Widget_Helper_Form_Element_Textarea('SNSHTML', NULL, NULL, _t('SNS链接设置'), _t('编辑此处HTML即可修改作者信息下面的社交网络内容，不知道怎么写？<a href="https://github.com/Archeb/Candy-Rebirth">【参考这里】</a>'));
     $form->addInput($SNSHTML);
+    $siteCreate = new Typecho_Widget_Helper_Form_Element_Text('siteCreate', NULL, NULL, _t('站点成立年份'), _t('方便Copyright显示'));
+    $form->addInput($siteCreate);
     $firstScreen = new Typecho_Widget_Helper_Form_Element_Radio('firstScreen', 
     array('showIndex' => _t('显示首页(Explore Me)'),
     'showArchive' => _t('显示文章列表')),

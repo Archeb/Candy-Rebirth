@@ -6,8 +6,8 @@ if(!isset($_GET['ajaxload'])){
     $this->need('header.php');
     ?><div id="index" class="screen index">
     <div style="margin:40vh auto;text-align:center;">
-        <h1 style="font-size:2.3rem">贫困的蚊子</h1>
-        <span style="color:#696969;font-size:0.9rem">亦余心之所向兮，虽九死其尤未悔</font>
+    <h1 style="font-size:2.3rem"><?php $this->options->title(); ?></h1>
+    <span style="color:#696969;font-size:0.9rem"><?php $this->options->description(); ?></font>
         <h3></h3>
         <br>
         <a href="#" class="btn" onclick="Move('#archive','#index','right')">Explore Me</a>
