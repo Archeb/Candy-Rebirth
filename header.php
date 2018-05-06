@@ -41,6 +41,7 @@ error_reporting(E_ALL | E_STRICT);
 	    }
 	    <?php } ?>
 	</style>
+	<?php $this->header(); ?>
 </head>
 <body>
     <?php 
