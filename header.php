@@ -1,5 +1,6 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <?php
+ob_start();
 ini_set("display_errors", "On");
 error_reporting(E_ALL | E_STRICT);
 ?>
@@ -14,6 +15,7 @@ error_reporting(E_ALL | E_STRICT);
     <script src="<?php $this->options->themeUrl('js/plugins.js'); ?>" type="text/javascript" charset="utf-8"></script>
     <script src="<?php $this->options->themeUrl('js/m.js?v5'); ?>" type="text/javascript" charset="utf-8"></script>
 	<script src="<?php $this->options->themeUrl('js/less.min.js'); ?>" type="text/javascript" charset="utf-8"></script>
+    <script src="<?php $this->options->themeUrl('js/lazysizes.min.js'); ?>" type="text/javascript" charset="utf-8" async=""></script>
 	<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 	<link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/vs2015.min.css" rel="stylesheet">
 	<link href="<?php $this->options->themeUrl('css/materialdesignicons.min.css'); ?>" media="all" rel="stylesheet" type="text/css" />
