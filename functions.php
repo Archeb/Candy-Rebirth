@@ -45,6 +45,8 @@ function themeConfig($form) {
     $form->addInput($SNSHTML);
     $siteCreate = new Typecho_Widget_Helper_Form_Element_Text('siteCreate', NULL, NULL, _t('站点成立年份'), _t('方便Copyright显示'));
     $form->addInput($siteCreate);
+    $lazyLoad = new Typecho_Widget_Helper_Form_Element_Text('lazyLoad', NULL, NULL, _t('图片懒加载占位图'), _t('默认是阿卡林呢'));
+    $form->addInput($lazyLoad);
     $firstScreen = new Typecho_Widget_Helper_Form_Element_Radio('firstScreen', 
     array('showIndex' => _t('显示首页(Explore Me)'),
     'showArchive' => _t('显示文章列表')),
