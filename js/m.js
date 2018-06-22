@@ -1,4 +1,4 @@
-var backArchive=false,categoryInfo;
+yvar backArchive=false,categoryInfo;
 var nowLoading=false,nowSending=false;
 
 document.addEventListener('DOMContentLoaded',function(){
@@ -201,7 +201,7 @@ function back(){
 }
 
 window.commentMode=0; //0为邮箱Gravatar，1为使用QQ头像
-window.TypechoComment={
+window.TypechoCommentX={
     reply: function(el,id){
         var replyEl=document.querySelector('.reply-info');
         replyEl.classList.remove('reply-info-closed');
