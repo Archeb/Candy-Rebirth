@@ -23,7 +23,7 @@
                 <div class="send-comment">
                 <div class="reply-info reply-info-closed">
                     <div class="left">您正在回复给 <span id="reply-name">Poi</span>：</div>
-                    <div class="right"><a onclick="TypechoComment.cancelReply()"><svg style="width:18px;height:18px;margin-top:2px" viewBox="0 0 24 24">
+                    <div class="right"><a onclick="TypechoCommentX.cancelReply()"><svg style="width:18px;height:18px;margin-top:2px" viewBox="0 0 24 24">
     <path fill="#626262" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
 </svg></a></div>
                     <input type="hidden" name="parent" id="comment-parent" value="">
