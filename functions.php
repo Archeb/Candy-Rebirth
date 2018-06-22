@@ -129,7 +129,7 @@ echo $commentClass;
                 </div>
             </div>
         </div>
-        <a class="comment-reply" onclick="TypechoComment.reply('<?php $comments->theId(); ?>', <?php echo explode("-",$comments->theId)[1]; ?>);"><span class="mdi mdi-reply"></span></a> 
+        <a class="comment-reply" onclick="TypechoCommentX.reply('<?php $comments->theId(); ?>', <?php echo explode("-",$comments->theId)[1]; ?>);"><span class="mdi mdi-reply"></span></a> 
     </div>
 <?php if ($comments->children) { ?>
     <div class="comment-children">
