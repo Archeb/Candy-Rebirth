@@ -9,6 +9,31 @@ error_reporting(E_ALL | E_STRICT);
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <?php if($this->is('index')): ?>
+    <meta property="og:url" content="<?php $this->options ->siteUrl(); ?>"/>
+    <meta property="og:type" content="blog"/>
+    <meta property="og:title" content="<?php $this->options->title(); ?>"/>
+    <?php if ($this->options->logoURL){ ?>
+        <meta property="og:image" content="<?php $this->options->logoURL(); ?>" />
+    <?php }else{ ?> 
+        <meta property="og:image" content="<?php echo gravatarUrl($this, 100); ?>" />
+    <?php      } ?>
+    <meta property="og:author" content="<?php $this->author->name(); ?>"/>
+    <meta property="og:site_name" content="<?php $this->options->title(); ?>"/>
+    <meta property="og:description" content="<?php $this->options->description(); ?>"/>
+    <meta property="og:locale:alternate" content="zh_CN"/>
+    <?php endif; ?>
+
+    <?php if($this->is('post')||$this->is('page')): ?>
+    <meta property="og:url" content="<?php $this->permalink(); ?>"/>
+    <meta property="og:type" content="blog"/>
+    <meta property="og:title" content="<?php $this->title(); ?>"/>
+    <meta property="og:image" content="<?php showThumbnail($this); ?>"/>
+    <meta property="og:author" content="<?php $this->author(); ?>"/>
+    <meta property="og:site_name" content="<?php $this->options->title(); ?>"/>
+    <meta property="og:description" content="<?php $this->description(); ?>"/>
+    <meta property="og:locale:alternate" content="zh_CN"/>
+    <?php endif; ?>
     <title><?php $this->options->title(); ?></title>
     <link rel="stylesheet/less" href="<?php $this->options->themeUrl('css/w.less?v2'); ?>">
     <script src="<?php $this->options->themeUrl('js/plugins.js'); ?>" type="text/javascript" charset="utf-8"></script>
