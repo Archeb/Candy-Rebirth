@@ -200,4 +200,26 @@ function time_elapsed_string($datetime, $full = false) {
     if (!$full) $string = array_slice($string, 0, 1);
     return $string ? implode(', ', $string) . '' : '';
 }
+
+function showThumbnail($widget)
+{ 
+    $random = gravatarUrl($widget);
+    $attach = $widget->attachments(1)->attachment;
+    $pattern = '/\<img.*?src\=\"(.*?)\"[^>]*>/i'; 
+    if ($widget->fields->previewImage && $widget->fields->previewImage!=="") {
+        $widget->fields->previewImage();
+    } else if (preg_match_all($pattern, $widget->content, $thumbUrl)) {
+        echo $thumbUrl[1][0];
+    } else if (@$attach->isImage) {
+        echo $attach->url; 
+    } else {
+        echo $random;
+     }
+}
+
+function gravatarUrl($widget, $size = 40, $rating = 'X', $default = NULL, $class = NULL)
+{
+    $url = Typecho_Common::gravatarUrl($widget->author->mail, $size, $rating, $default, $widget->request->isSecure());
+    return $url;
+}
 ?> 
