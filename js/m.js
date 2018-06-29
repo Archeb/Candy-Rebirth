@@ -1,4 +1,4 @@
-yvar backArchive=false,categoryInfo;
+var backArchive=false,categoryInfo;
 var nowLoading=false,nowSending=false;
 
 document.addEventListener('DOMContentLoaded',function(){
