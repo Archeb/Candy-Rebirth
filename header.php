@@ -80,7 +80,7 @@ error_reporting(E_ALL | E_STRICT);
     <div class="notify-container"></div>
     <div class="menu">
         <div class="group">
-            <a class="item mdi mdi-arrow-left" id="back" onclick="back()"></a>
+            <a class="item mdi mdi-arrow-left" id="back" onclick="back()" style="opacity: 0;"></a>
             <div class="drop-down">
                 <span class="item mdi mdi-format-annotation-plus" onclick="biggerFont()"></span>
                 <span class="item mdi mdi-share-variant"></span>
