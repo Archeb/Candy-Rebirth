@@ -19,7 +19,7 @@ $this -> need('header.php');
 <div id="index" class="screen index <?php if($this->options->firstScreen=="showIndex") echo "move-show"; ?>">
     <div style="margin:40vh auto;text-align:center;">
         <h1 style="font-size:2.3rem"><?php $this->options->title(); ?></h1>
-        <span style="color:#696969;font-size:0.9rem"><?php $this->options->description(); ?></font>
+        <span style="color:#696969;font-size:0.9rem"><?php $this->options->description(); ?></span>
         <h3></h3>
         <br>
         <a href="#" class="btn" onclick="Move('#archive','#index','right')">Explore Me</a>
