@@ -242,7 +242,7 @@ function sendComment(){
     }
     fetch(form.action,{credentials:'include',method: "POST",body:data}).then(function(data){return data.text()}).then(function(text){
         nowSending=false;
-        if(text.indexOf('Error')!=-1){
+        if(text.indexOf('<title>Error</title>')!=-1){
             showNotify('评论失败',parseToDOM(text)[7].innerText.trim(),'background-color:#ff3f3f');
         } else if (text.indexOf('Typecho_Widget_Exception: ') != -1) {
             showNotify('评论失败',text.match(/Typecho_Widget_Exception: ([\S\s]*?)in/)[1],'background-color:#ff3f3f');
