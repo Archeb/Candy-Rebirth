@@ -109,7 +109,10 @@ function loadMoreArticles(){
             if(el.tagName=="DIV"){
                 document.querySelector(targetElement).appendChild(el);
             }
-            
+            //mathjax渲染支持
+            if(MathJax){
+                MathJax.Hub.Typeset();
+            }
         });
         pageInfo.currentPage=parseInt(pageInfo.currentPage) + 1;
         nowLoading=false;
@@ -139,6 +142,10 @@ function showArticle(url){
             if(el.tagName=="DIV"){
                 if(document.querySelector('.page-wrapper')){document.querySelector('.page-wrapper').remove()};
                 document.querySelector('.page-container').appendChild(el);
+                //mathjax渲染支持
+                if(MathJax){
+                    MathJax.Hub.Typeset();
+                }
                 var codeBlocks=document.querySelectorAll('pre code').forEach((e)=>{
                 　　hljs.highlightBlock(e);
                 });
@@ -319,10 +326,18 @@ function showArchive(url){
                     document.querySelector('.category-container').appendChild(el);
                 }
             }
+			
             if(el.id=="tmp_total"){
                 categoryInfo.total=el.value;
             }
         });
+		//mathjax渲染支持
+		if(MathJax){
+			MathJax.Hub.Typeset();
+		}
+		var codeBlocks=document.querySelectorAll('pre code').forEach((e)=>{
+		　　hljs.highlightBlock(e);
+		});
     });
 }
 
