@@ -109,11 +109,12 @@ function loadMoreArticles(){
             if(el.tagName=="DIV"){
                 document.querySelector(targetElement).appendChild(el);
             }
-            //mathjax渲染支持
-            if(MathJax){
-                MathJax.Hub.Typeset();
-            }
+            
         });
+	//mathjax渲染支持
+	if(MathJax){
+	    MathJax.Hub.Typeset();
+	}
         pageInfo.currentPage=parseInt(pageInfo.currentPage) + 1;
         nowLoading=false;
     });
