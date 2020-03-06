@@ -2,9 +2,7 @@
 
 一个Typecho单行横屏滚动主题！
 
-预览地址 https://qwq.moe/
-
-博客对该主题的介绍 https://qwq.moe/archives/712/ （不再更新）
+预览地址 https://moeclue.com/ https://www.bokutake.com/ 
 
 
 ### 鸣谢
