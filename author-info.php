@@ -2,7 +2,7 @@
     <?php if ($this->options->logoURL){ ?>
             <img class="avatar" src="<?php $this->options->logoURL(); ?>" width="100" height="100">
     <?php }else{
-            $this->author->gravatar(100,null,null,'avatar'); 
+            $this->author->gravatar(100,'','','avatar'); 
            }
     ?>
             <div class="name"><?php $this->options->title(); ?></div>
