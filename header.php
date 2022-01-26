@@ -39,8 +39,8 @@ error_reporting(E_ALL | E_STRICT);
     <script src="<?php $this->options->themeUrl('js/plugins.js'); ?>" type="text/javascript" charset="utf-8"></script>
     <script src="<?php $this->options->themeUrl('js/m.js?v5'); ?>" type="text/javascript" charset="utf-8"></script>
 	<script src="<?php $this->options->themeUrl('js/less.min.js'); ?>" type="text/javascript" charset="utf-8"></script>
-	<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-	<link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/vs2015.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+	<link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.4.0/styles/vs2015.min.css" rel="stylesheet">
 	<link href="<?php $this->options->themeUrl('css/materialdesignicons.min.css'); ?>" media="all" rel="stylesheet" type="text/css" />
 	<style>
 	    .page-container{
